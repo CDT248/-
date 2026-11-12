@@ -1,808 +1,748 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>মুক্ত কথা — মনের কথা বলুন</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123d35">
+<title>মুক্ত কথা | মন খুলে বলুন</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --primary: #176b55;
-  --dark: #123c32;
-  --light: #eaf5ef;
-  --white: #ffffff;
-  --text: #243b35;
+:root{
+ --green:#176b55;--deep:#103d34;--ink:#203a32;
+ --muted:#75877e;--line:#e6eee8;--page:#f6f9f6;
+ --surface:#fff;--soft:#f0f8f2;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ font-family:'Hind Siliguri',sans-serif;
+ background:var(--page);color:var(--ink);
+ line-height:1.7;transition:.2s;
 }
-
-body {
-  font-family: 'Hind Siliguri', sans-serif;
-  background: #f5f8f5;
-  color: var(--text);
+body.dark{
+ --page:#101a17;--surface:#182620;--soft:#1b3025;
+ --ink:#e5f1e9;--muted:#a4b7aa;--line:#2b4035;
 }
-
-/* Navigation */
-
-.navbar {
-  background: white;
-  padding: 15px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 15px rgba(0,0,0,.05);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+body.dark .topbar,
+body.dark .card,
+body.dark .chatbox,
+body.dark .message,
+body.dark .prompt,
+body.dark .stat,
+body.dark .rule{
+ background:var(--surface);color:var(--ink);
+ border-color:var(--line);
 }
+body.dark .brand-name,
+body.dark h2,body.dark .quote-text{color:#d9f2e2}
+body.dark .chat-area{background:#14221b}
+body.dark .chat-guideline,
+body.dark .community{background:var(--soft);color:#c5e5d0}
+body.dark textarea{background:#14221b;color:#fff;border-color:#385343}
+body.dark .prompt span,body.dark .rule p,
+body.dark .section-head p{color:#a4b7aa}
+body.dark .topic{background:#203b2c;color:#c4e5cf}
+body.dark .theme-btn{background:#293b31;color:#fff;border-color:#47634f}
 
-.logo {
-  font-size: 27px;
-  font-weight: 800;
-  color: var(--primary);
+a,button,textarea{font:inherit}
+a{text-decoration:none;color:inherit}
+.topbar{
+ position:sticky;top:0;z-index:20;
+ background:#fff;border-bottom:1px solid var(--line);
+ padding:12px max(5%,calc((100% - 1180px)/2));
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;
 }
-
-.nav-tag {
-  color: #688078;
-  font-size: 13px;
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{
+ width:43px;height:43px;border-radius:14px;
+ background:linear-gradient(145deg,#1b8063,#104536);
+ color:white;display:grid;place-items:center;font-size:22px;
 }
-
-/* Hero */
-
-.hero {
-  background: linear-gradient(135deg,#123c32,#176b55,#278c6b);
-  color: white;
-  padding: 75px 20px 85px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.brand-name{font-size:25px;font-weight:800;color:var(--deep)}
+.brand-sub{font-size:11px;color:var(--muted)}
+.navlinks{display:flex;align-items:center;gap:15px;font-size:13px}
+.navlinks a{color:var(--muted)}
+.nav-cta{background:var(--green);color:white!important;padding:8px 15px;border-radius:25px}
+.theme-btn{
+ border:1px solid #dce8df;background:#f3f8f4;
+ color:#24533d;border-radius:25px;padding:8px 13px;
+ cursor:pointer;font-weight:700;white-space:nowrap;
 }
-
-.hero::before,
-.hero::after {
-  content: "❝";
-  position: absolute;
-  font-size: 180px;
-  color: rgba(255,255,255,.06);
+.hero{
+ background:linear-gradient(125deg,#103d34,#176b55 58%,#2a9270);
+ color:white;overflow:hidden;
 }
-
-.hero::before {
-  left: 5%;
-  top: 5px;
+.hero-inner{
+ max-width:1180px;margin:auto;padding:75px 24px;
+ display:grid;grid-template-columns:1.2fr .8fr;
+ align-items:center;gap:35px;
 }
-
-.hero::after {
-  right: 5%;
-  bottom: -65px;
-  transform: rotate(180deg);
+.eyebrow{
+ display:inline-block;border:1px solid #ffffff55;
+ background:#ffffff12;padding:6px 14px;
+ border-radius:25px;font-size:13px;
 }
-
-.hero-content {
-  max-width: 850px;
-  margin: auto;
-  position: relative;
-  z-index: 1;
+.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.2;margin:20px 0}
+.hero h1 span{color:#c7f1d7}
+.hero-lead{font-size:18px;line-height:1.9;color:#e5f4eb}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{
+ display:inline-block;border-radius:28px;padding:12px 22px;
+ font-weight:700;cursor:pointer;border:0;
 }
-
-.hero h1 {
-  font-size: clamp(34px,6vw,58px);
-  font-weight: 800;
-  margin-bottom: 15px;
+.btn-light{background:#fff;color:#103d34}
+.btn-outline{border:1px solid #ffffff80;color:#fff}
+.note-card{
+ background:#fff;color:#103d34;padding:25px;
+ border-radius:23px;box-shadow:0 20px 60px #082c2545;
+ transform:rotate(2deg);max-width:350px;
 }
-
-.hero h2 {
-  font-size: clamp(20px,3vw,30px);
-  font-weight: 500;
-  color: #d9f5e8;
-  margin-bottom: 20px;
+.note-card h3{font-size:23px;margin:10px 0}
+.note-card p{color:#63776c;line-height:2}
+.note-icon{font-size:32px}
+.stats{
+ max-width:1080px;margin:-25px auto 0;padding:0 18px;
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:12px;position:relative;
 }
-
-.hero p {
-  font-size: 17px;
-  line-height: 2;
-  color: #e5f4ed;
+.stat{
+ background:#fff;border:1px solid var(--line);
+ padding:16px;border-radius:15px;text-align:center;
 }
-
-.hero-button {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 13px 30px;
-  background: white;
-  color: var(--primary);
-  text-decoration: none;
-  border-radius: 30px;
-  font-weight: 700;
-  transition: .3s;
+.stat strong{display:block;color:var(--green);font-size:18px}
+.stat span{font-size:12px;color:var(--muted)}
+.section{max-width:1180px;margin:70px auto;padding:0 20px}
+.section-head{text-align:center;margin-bottom:28px}
+.kicker{font-size:13px;color:var(--green);font-weight:700}
+.section-head h2,.chat-heading h2{
+ font-size:clamp(28px,4vw,39px);color:var(--deep);margin:8px 0;
 }
-
-.hero-button:hover {
-  transform: translateY(-3px);
+.section-head p,.chat-heading p{color:var(--muted)}
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+ background:#fff;border:1px solid var(--line);
+ border-radius:17px;padding:22px;
+ box-shadow:0 7px 25px #183d2a08;
 }
-
-/* Quotes */
-
-.quotes {
-  max-width: 1150px;
-  margin: 45px auto;
-  padding: 0 20px;
+.quote-icon{font-size:25px;color:#4c9b78}
+.quote-text{font-size:17px;line-height:1.9}
+.card small{display:block;color:var(--muted);margin-top:12px}
+.community{
+ background:linear-gradient(135deg,#eaf5ed,#f7faf7);
+ padding:45px 20px;text-align:center;
 }
-
-.section-heading {
-  text-align: center;
-  margin-bottom: 30px;
+.community h2{font-size:30px;color:var(--deep);margin:8px}
+.community p{max-width:750px;margin:auto;color:#65796e}
+.topics{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:20px}
+.topic{
+ background:#edf6ef;border:1px solid #dfede2;
+ color:#3e7458;border-radius:25px;padding:7px 14px;font-size:13px;
 }
-
-.section-heading h2 {
-  font-size: 29px;
-  color: var(--dark);
+.prompt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.prompt{
+ background:#fff;border:1px solid var(--line);
+ border-radius:15px;padding:16px;cursor:pointer;text-align:left;
+ color:var(--ink);transition:.2s;
 }
+.prompt:hover{border-color:#8fc4a2;transform:translateY(-3px)}
+.prompt b{display:block;color:var(--green);margin-bottom:5px}
+.prompt span{font-size:13px;color:#708078}
+.prompt-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
 
-.section-heading p {
-  color: #81928a;
-  margin-top: 5px;
+.chat-section{max-width:980px;margin:70px auto;padding:0 18px}
+.chat-heading{text-align:center;margin-bottom:23px}
+.chatbox{
+ background:#fff;border:1px solid var(--line);
+ border-radius:20px;overflow:hidden;
+ box-shadow:0 12px 40px #183d2a12;
 }
-
-.quote-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
+.chat-head{
+ background:linear-gradient(100deg,#124a3b,#19775b);
+ color:white;padding:17px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
-
-.quote-card {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.04);
-  border-bottom: 3px solid #80b9a0;
+.chat-head h3{font-size:19px}
+.chat-head p{font-size:12px;color:#d4ebdf}
+.live-pill{font-size:12px;border:1px solid #ffffff55;padding:5px 10px;border-radius:25px}
+.chat-guideline{
+ background:#f0f8f2;color:#587b65;text-align:center;
+ padding:10px;font-size:12px;border-bottom:1px solid var(--line);
 }
-
-.quote-card .symbol {
-  font-size: 30px;
-  color: #55a181;
+.chat-area{
+ height:440px;overflow-y:auto;padding:18px;
+ background:#f7faf7;display:flex;flex-direction:column;gap:12px;
 }
-
-.quote-card p {
-  font-size: 17px;
-  line-height: 1.8;
-  font-weight: 500;
+.message{
+ max-width:85%;background:#fff;border:1px solid var(--line);
+ border-radius:5px 15px 15px 15px;
+ padding:10px 14px;overflow-wrap:anywhere;
 }
-
-.quote-card span {
-  display: block;
-  margin-top: 12px;
-  font-size: 12px;
-  color: #8a9b93;
+.message-text{font-size:15px;line-height:1.8;white-space:pre-wrap}
+.message-time{text-align:right;font-size:10px;color:#99a79e;margin-top:4px}
+.empty{margin:auto;text-align:center;color:var(--muted);padding:20px}
+.empty h3{color:#416b53;font-size:20px}
+.empty .leaf{font-size:35px}
+.chat-compose{padding:15px;border-top:1px solid var(--line)}
+.compose-row{display:flex;align-items:flex-end;gap:9px}
+#messageInput{
+ flex:1;min-width:0;resize:none;min-height:49px;max-height:130px;
+ border:1px solid #dce8df;border-radius:14px;
+ padding:12px 14px;outline:none;font-size:15px;
 }
-
-/* Chat section */
-
-.chat-section {
-  max-width: 950px;
-  margin: 55px auto;
-  padding: 0 15px;
+#messageInput:focus{border-color:#55a77b}
+#sendButton{
+ height:49px;padding:0 22px;border:0;
+ border-radius:13px;background:var(--green);
+ color:white;font-weight:700;cursor:pointer;
 }
-
-.chat-title {
-  text-align: center;
-  margin-bottom: 25px;
+#sendButton:disabled{opacity:.5;cursor:not-allowed}
+.compose-meta{
+ display:flex;justify-content:space-between;
+ font-size:11px;color:var(--muted);margin-top:7px;
 }
-
-.chat-title h2 {
-  font-size: 34px;
-  color: var(--dark);
+#status{color:#b64d4d}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.rule{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
+.rule strong{display:block;color:var(--deep)}
+.rule p{font-size:13px;color:var(--muted)}
+.footer{
+ background:#123d35;color:#fff;text-align:center;padding:45px 20px;
 }
+.footer h2{font-size:30px}
+.footer p{max-width:650px;margin:8px auto;color:#d0e6d9}
+.footer small{display:block;margin-top:20px;color:#9fc5ae}
 
-.chat-title p {
-  color: #7c9086;
-  font-size: 15px;
+@media(max-width:800px){
+ .hero-inner{grid-template-columns:1fr;padding:55px 20px}
+ .note-card{display:none}
+ .quote-grid{grid-template-columns:repeat(2,1fr)}
+ .prompt-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-.chat-container {
-  background: white;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 35px rgba(0,0,0,.08);
-  border: 1px solid #e6eee8;
-}
-
-.chat-header {
-  background: #176b55;
-  padding: 18px 22px;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chat-header h3 {
-  font-size: 21px;
-}
-
-.chat-header p {
-  font-size: 12px;
-  color: #d8eee4;
-}
-
-.public-label {
-  font-size: 12px;
-  background: rgba(255,255,255,.15);
-  padding: 7px 12px;
-  border-radius: 20px;
-}
-
-.chat-notice {
-  text-align: center;
-  background: #f0f8f3;
-  padding: 11px;
-  font-size: 13px;
-  color: #567a67;
-}
-
-.chat-area {
-  height: 430px;
-  overflow-y: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-  background: #f8fbf8;
-}
-
-.message {
-  max-width: 80%;
-  background: white;
-  padding: 11px 15px;
-  border-radius: 13px;
-  border: 1px solid #e6eee8;
-  align-self: flex-start;
-  box-shadow: 0 2px 5px rgba(0,0,0,.025);
-  overflow-wrap: anywhere;
-}
-
-.message-text {
-  font-size: 15px;
-  line-height: 1.8;
-  white-space: pre-wrap;
-}
-
-.message-time {
-  font-size: 10px;
-  text-align: right;
-  color: #a0aaa4;
-  margin-top: 5px;
-}
-
-.empty {
-  margin: auto;
-  text-align: center;
-  color: #91a198;
-  line-height: 2;
-}
-
-.chat-footer {
-  padding: 16px;
-  border-top: 1px solid #edf1ed;
-}
-
-.input-box {
-  display: flex;
-  gap: 10px;
-  align-items: flex-end;
-}
-
-#messageInput {
-  flex: 1;
-  min-width: 0;
-  min-height: 48px;
-  max-height: 120px;
-  resize: none;
-  outline: none;
-  border: 1px solid #dce8df;
-  border-radius: 12px;
-  padding: 12px 14px;
-  font-family: inherit;
-  font-size: 15px;
-}
-
-#messageInput:focus {
-  border-color: #29916b;
-}
-
-#sendButton {
-  background: #176b55;
-  border: none;
-  color: white;
-  padding: 12px 23px;
-  height: 48px;
-  border-radius: 12px;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-#sendButton:hover {
-  background: #104b3b;
-}
-
-#sendButton:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.status {
-  text-align: center;
-  font-size: 12px;
-  color: #c34e4e;
-  min-height: 19px;
-  margin-top: 5px;
-}
-
-.footer-note {
-  text-align: center;
-  font-size: 11px;
-  color: #91a198;
-  margin-top: 8px;
-}
-
-/* Bottom */
-
-.bottom {
-  background: #123c32;
-  color: white;
-  text-align: center;
-  padding: 35px 15px;
-}
-
-.bottom h2 {
-  font-size: 25px;
-  margin-bottom: 8px;
-}
-
-.bottom p {
-  color: #c5ddd1;
-  font-size: 13px;
-}
-
-.bottom small {
-  display: block;
-  margin-top: 18px;
-  color: #91b4a3;
-}
-
-@media(max-width:700px) {
-  .quote-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 55px 20px 65px;
-  }
-
-  .navbar {
-    padding: 12px 5%;
-  }
-
-  .nav-tag {
-    font-size: 10px;
-  }
-
-  .chat-area {
-    height: 400px;
-  }
-
-  .chat-title h2 {
-    font-size: 27px;
-  }
-
-  .message {
-    max-width: 92%;
-  }
-}
-
-@media(max-width:400px) {
-  #sendButton {
-    padding: 12px 14px;
-  }
+@media(max-width:560px){
+ .topbar{padding:10px 12px}
+ .navlinks a:not(.nav-cta){display:none}
+ .brand-name{font-size:21px}
+ .brand-sub{font-size:10px}
+ .theme-btn{font-size:12px;padding:7px 10px}
+ .hero-inner{text-align:center;padding:48px 17px}
+ .hero-actions{justify-content:center}
+ .hero-lead{font-size:16px}
+ .stats{grid-template-columns:1fr;margin-top:-18px}
+ .stat{padding:9px}
+ .quote-grid,.rules{grid-template-columns:1fr}
+ .section{margin:52px auto}
+ .chat-area{height:390px;padding:12px}
+ .message{max-width:94%}
+ .chat-head h3{font-size:16px}
+ .live-pill{font-size:10px}
+ #sendButton{padding:0 14px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<header class="topbar">
+ <a href="#" class="brand">
+  <span class="brand-mark">মু</span>
+  <span>
+   <span class="brand-name">মুক্ত কথা</span>
+   <span class="brand-sub">মনের জানালা, সবার জন্য</span>
+  </span>
+ </a>
 
-<nav class="navbar">
-  <div class="logo">মুক্ত কথা.</div>
-  <div class="nav-tag">একটি মুক্ত মনের জায়গা</div>
-</nav>
+ <nav class="navlinks">
+  <a href="#about">আমাদের কথা</a>
+  <a href="#prompts">লেখার বিষয়</a>
+  <a href="#public-chat" class="nav-cta">কথা বলুন ↓</a>
+  <button id="themeToggle" class="theme-btn" type="button">
+   🌙 ডার্ক
+  </button>
+ </nav>
+</header>
 
-<!-- HERO SECTION -->
+<main>
 
-<section class="hero">
-
-  <div class="hero-content">
-
-    <h1>মুক্ত কথা</h1>
-
-    <h2>মন খুলে বলুন, নির্ভয়ে লিখুন</h2>
-
-    <p>
-      কিছু কথা থাকে যা কাউকে বলা যায় না।<br>
-      কিছু অনুভূতি থাকে যা মনের ভেতর জমে থাকে।<br>
-      কিছু কষ্ট থাকে যা প্রকাশ করার জায়গা খুঁজে পায় না।
-    </p>
-
-    <p>
-      এখানে আপনার মনের কথা লিখুন।<br>
-      আপনার পরিচয় প্রকাশ না করেই নিজের অনুভূতি ভাগ করে নিন।
-    </p>
-
-    <a href="#public-chat" class="hero-button">
-      মনের কথা লিখুন ↓
-    </a>
-
+<section class="hero" id="about">
+ <div class="hero-inner">
+  <div>
+   <span class="eyebrow">✦ আপনার কথা, আপনার মতো করে</span>
+   <h1>মনের দরজা খুলুন,<br><span>মুক্তভাবে বলুন।</span></h1>
+   <p class="hero-lead">
+    কখনো আনন্দ, কখনো অভিমান, কখনো না বলা হাজারো কথা—
+    সব অনুভূতির জন্যই থাকুক একটি খোলা জায়গা।
+    এখানে লিখুন আপনার মনের কথা, পড়ুন অন্যদের অনুভূতি।
+    মনে রাখুন, আপনার কথাও গুরুত্বপূর্ণ।
+   </p>
+   <div class="hero-actions">
+    <a href="#public-chat" class="btn btn-light">✍️ মনের কথা লিখুন</a>
+    <a href="#prompts" class="btn btn-outline">💭 কী লিখব ভাবছি</a>
+   </div>
+   <p style="font-size:12px;color:#cce6d7;margin-top:15px">
+    কোনো অ্যাকাউন্ট প্রয়োজন নেই • চ্যাটে নাম দেখানো হয় না
+   </p>
   </div>
 
+  <div class="note-card">
+   <div class="note-icon">🌿 💌</div>
+   <h3>এখানে আপনি বলতে পারেন…</h3>
+   <p>
+    “আজ মনটা ভালো নেই।”<br>
+    “একটা সুন্দর ঘটনা শেয়ার করতে চাই।”<br>
+    “কাউকে কিছু বলতে ইচ্ছে করছে।”
+   </p>
+   <hr style="border:0;border-top:1px solid #e3ece5;margin:17px 0">
+   <small>আপনার অনুভূতি গুরুত্বপূর্ণ ♡</small>
+  </div>
+ </div>
 </section>
 
-<!-- QUOTES -->
+<div class="stats">
+ <div class="stat"><strong>🕊️ মুক্ত প্রকাশ</strong><span>নিজের মতো করে বলুন</span></div>
+ <div class="stat"><strong>💬 সবার কথোপকথন</strong><span>একই জায়গায় সবার লেখা</span></div>
+ <div class="stat"><strong>🎨 রঙিন বার্তা</strong><span>আলাদা আলাদা লেখার রং</span></div>
+</div>
 
-<section class="quotes">
+<section class="section">
+ <div class="section-head">
+  <span class="kicker">মনের পাতায় কিছু কথা</span>
+  <h2>কথা জমিয়ে রাখবেন না</h2>
+  <p>প্রতিটি মানুষের গল্প আলাদা। আপনার অনুভূতিরও জায়গা আছে।</p>
+ </div>
 
-  <div class="section-heading">
-    <h2>আপনার মনের কথাগুলো মূল্যবান</h2>
-    <p>কিছু অনুভূতি, কিছু উপলব্ধি, কিছু জীবনের কথা</p>
-  </div>
-
-  <div class="quote-grid">
-
-    <div class="quote-card">
-      <div class="symbol">❝</div>
-      <p>
-        সবসময় হাসি মানেই ভালো থাকা নয়,
-        কখনো কখনো হাসির আড়ালেও অনেক গল্প লুকিয়ে থাকে।
-      </p>
-      <span>— জীবনের অনুভূতি</span>
-    </div>
-
-    <div class="quote-card">
-      <div class="symbol">❝</div>
-      <p>
-        মনের কথা চেপে রাখবেন না।
-        আপনার অনুভূতিরও প্রকাশ পাওয়ার অধিকার আছে।
-      </p>
-      <span>— নিজের জন্য কিছু কথা</span>
-    </div>
-
-    <div class="quote-card">
-      <div class="symbol">❝</div>
-      <p>
-        পৃথিবীতে প্রত্যেক মানুষেরই এমন একটা জায়গা দরকার,
-        যেখানে সে নির্দ্বিধায় নিজের কথা বলতে পারে।
-      </p>
-      <span>— মুক্ত কথার ভাবনা</span>
-    </div>
-
-  </div>
-
+ <div class="quote-grid">
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">সবাই আপনার হাসি দেখে, কিন্তু সেই হাসির পেছনের গল্পটা সবাই জানে না। নিজের অনুভূতিকে একটু সময় দিন।</p>
+   <small>— নিজের প্রতি যত্ন</small>
+  </article>
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">কিছু কথা কাউকে বলার জন্য নয়, শুধু বুকের ভেতর থেকে নামিয়ে রাখার জন্য লিখে ফেলাই যথেষ্ট।</p>
+   <small>— না বলা কথা</small>
+  </article>
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">একটি ছোট্ট ভালো কথা কারও কঠিন দিনটিকে একটু সহজ করে দিতে পারে। তাই সুন্দর কথা ছড়িয়ে দিন।</p>
+   <small>— একটু ভালো থাকা</small>
+  </article>
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">ভুল করা মানেই শেষ নয়। প্রতিটি নতুন সকাল আবার শুরু করার একটি সুযোগ।</p>
+   <small>— নতুন শুরু</small>
+  </article>
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">আপনার অনুভূতি ছোট নয়। অন্য কেউ বুঝতে না পারলেও আপনার অনুভব করার অধিকার আছে।</p>
+   <small>— নিজের মূল্য</small>
+  </article>
+  <article class="card">
+   <div class="quote-icon">❝</div>
+   <p class="quote-text">শুনতে শেখাও এক ধরনের ভালোবাসা। কখনো সমাধান নয়, শুধু মন দিয়ে শোনাটাই প্রয়োজন।</p>
+   <small>— সহমর্মিতা</small>
+  </article>
+ </div>
 </section>
 
-<!-- CHAT -->
+<section class="community">
+ <span class="kicker">একটু থামুন, নিজের কথা ভাবুন</span>
+ <h2>আপনার মনের ভেতর আজ কী চলছে?</h2>
+ <p>
+  আজকের দিনটি কেমন গেল? কোনো কথা কি কাউকে বলতে পারছেন না?
+  কোনো স্মৃতি কি বারবার মনে পড়ছে? অথবা এমন কোনো আনন্দ আছে,
+  যা সবার সঙ্গে ভাগ করে নিতে চান? আপনার মতো করে লিখুন।
+ </p>
+ <div class="topics">
+  <span class="topic">🌧️ অভিমান</span>
+  <span class="topic">🌻 আনন্দ</span>
+  <span class="topic">💭 স্মৃতি</span>
+  <span class="topic">🌱 স্বপ্ন</span>
+  <span class="topic">🤍 বন্ধুত্ব</span>
+  <span class="topic">✨ জীবনের গল্প</span>
+  <span class="topic">🕊️ নিজের কথা</span>
+ </div>
+</section>
+
+<section class="section" id="prompts">
+ <div class="section-head">
+  <span class="kicker">লিখতে ইচ্ছে করছে, কিন্তু শুরু কোথা থেকে?</span>
+  <h2>কথা শুরু করার কিছু ভাবনা</h2>
+  <p>নিচের যেকোনো বিষয় বেছে নিলে সেটি লেখার ঘরে চলে যাবে।</p>
+ </div>
+
+ <div class="prompt-grid">
+  <button class="prompt" data-prompt="আজ আমার মনের অবস্থা হলো…">
+   <b>🌦️ আজকের অনুভূতি</b><span>আজ আপনার মন কেমন আছে?</span>
+  </button>
+  <button class="prompt" data-prompt="আমার জীবনের একটি সুন্দর স্মৃতি হলো…">
+   <b>📸 একটি স্মৃতি</b><span>মনে পড়ে যাওয়া কোনো মুহূর্ত।</span>
+  </button>
+  <button class="prompt" data-prompt="একটি কথা কাউকে বলতে চাই…">
+   <b>💌 না বলা কথা</b><span>অনেক দিন ধরে মনে থাকা কথা।</span>
+  </button>
+  <button class="prompt" data-prompt="আমার সবচেয়ে বড় স্বপ্ন হলো…">
+   <b>🌠 স্বপ্ন ও আশা</b><span>ভবিষ্যৎ নিয়ে আপনার ভাবনা।</span>
+  </button>
+  <button class="prompt" data-prompt="আজ আমি কৃতজ্ঞ কারণ…">
+   <b>🙏 কৃতজ্ঞতা</b><span>ছোট্ট কোনো ভালো লাগার কথা।</span>
+  </button>
+  <button class="prompt" data-prompt="বন্ধুত্ব নিয়ে আমার ভাবনা…">
+   <b>🫶 বন্ধুত্ব</b><span>সম্পর্ক ও মানুষের গল্প।</span>
+  </button>
+  <button class="prompt" data-prompt="জীবন আমাকে শিখিয়েছে…">
+   <b>📖 জীবনের শিক্ষা</b><span>অভিজ্ঞতা থেকে পাওয়া উপলব্ধি।</span>
+  </button>
+  <button class="prompt" data-prompt="অন্যদের জন্য আমার একটি ভালো কথা…">
+   <b>🌷 ভালো কথা</b><span>কারও দিন সুন্দর করার বার্তা।</span>
+  </button>
+ </div>
+ <p class="prompt-hint">একটি ভাবনায় ক্লিক করুন—লেখাটি চ্যাট বক্সে বসে যাবে।</p>
+</section>
 
 <section class="chat-section" id="public-chat">
+ <div class="chat-heading">
+  <span class="kicker">এবার আপনার পালা</span>
+  <h2>💬 মুক্ত কথার আড্ডা</h2>
+  <p>লিখুন, পড়ুন, একে অন্যের কথা সম্মান করুন।</p>
+ </div>
 
-  <div class="chat-title">
-    <h2>সবার মুক্ত আড্ডা</h2>
-    <p>লিখুন আপনার মনের কথা, পড়ুন অন্যদের অনুভূতি</p>
+ <div class="chatbox">
+  <div class="chat-head">
+   <div>
+    <h3>💬 সবার মুক্ত কথার গ্রুপ</h3>
+    <p>সবার জন্য উন্মুক্ত কথোপকথন</p>
+   </div>
+   <span class="live-pill">● পাবলিক চ্যাট</span>
   </div>
 
-  <div class="chat-container">
-
-    <div class="chat-header">
-
-      <div>
-        <h3>💬 মুক্ত কথার গ্রুপ</h3>
-        <p>একটি সবার জন্য উন্মুক্ত কথোপকথন</p>
-      </div>
-
-      <div class="public-label">
-        ● Public Chat
-      </div>
-
-    </div>
-
-    <div class="chat-notice">
-      এখানে নাম দেখানো হয় না। সবাই নিজের মতো করে কথা বলতে পারেন।
-    </div>
-
-    <main class="chat-area" id="chatArea">
-
-      <div class="empty">
-        <h3>🌿 মুক্ত কথায় স্বাগতম</h3>
-        <p>আপনিই শুরু করুন আপনার মনের কথা।</p>
-      </div>
-
-    </main>
-
-    <div class="chat-footer">
-
-      <div class="input-box">
-
-        <textarea
-          id="messageInput"
-          placeholder="এখানে আপনার মনের কথা লিখুন..."
-          maxlength="2000"
-          rows="1"
-        ></textarea>
-
-        <button id="sendButton" onclick="sendMessage()">
-          পাঠান ➤
-        </button>
-
-      </div>
-
-      <div class="status" id="status"></div>
-
-      <div class="footer-note">
-        আপনার নাম বা Username এখানে দেখানো হবে না।
-      </div>
-
-    </div>
-
+  <div class="chat-guideline">
+   এখানে মেসেজের সঙ্গে কোনো নাম দেখানো হয় না।
+   সম্মানজনক ভাষায় কথা বলুন।
   </div>
 
+  <main class="chat-area" id="chatArea" aria-live="polite">
+   <div class="empty">
+    <div class="leaf">🌿</div>
+    <h3>মুক্ত কথায় স্বাগতম</h3>
+    <p>আপনার একটি কথাই হতে পারে সুন্দর আলাপের শুরু।</p>
+   </div>
+  </main>
+
+  <div class="chat-compose">
+   <div class="compose-row">
+    <textarea id="messageInput" maxlength="2000" rows="1"
+     placeholder="মন খুলে লিখুন… (Enter চাপলে পাঠানো হবে)"
+     aria-label="আপনার মেসেজ"></textarea>
+    <button id="sendButton" type="button">পাঠান ➤</button>
+   </div>
+   <div class="compose-meta">
+    <span id="status" role="status"></span>
+    <span id="charCount">০ / ২০০০</span>
+   </div>
+  </div>
+ </div>
+
+ <div class="rules">
+  <div class="rule">
+   <strong>🤝 সম্মান বজায় রাখুন</strong>
+   <p>অন্যের মতামত ও অনুভূতিকে সম্মান করুন।</p>
+  </div>
+  <div class="rule">
+   <strong>🔒 ব্যক্তিগত তথ্য দেবেন না</strong>
+   <p>ফোন নম্বর, ঠিকানা বা পাসওয়ার্ড লিখবেন না।</p>
+  </div>
+  <div class="rule">
+   <strong>🌱 ভালো কথা ছড়িয়ে দিন</strong>
+   <p>হুমকি, হয়রানি বা ক্ষতিকর বিষয়বস্তু থেকে বিরত থাকুন।</p>
+  </div>
+ </div>
 </section>
 
-<!-- FOOTER -->
+</main>
 
-<footer class="bottom">
-
-  <h2>মুক্ত কথা.</h2>
-
-  <p>
-    এখানে কথা বলার কোনো বাধা নেই,
-    আপনার অনুভূতিই আপনার পরিচয়।
-  </p>
-
-  <small>
-    © 2026 মুক্ত কথা | একটি উন্মুক্ত কথোপকথনের জায়গা
-  </small>
-
+<footer class="footer">
+ <h2>মুক্ত কথা</h2>
+ <p>
+  কেউ হয়তো আপনার মতো করেই কিছু কথা বলতে চায়।
+  নিজের কথা বলুন, অন্যের কথা মন দিয়ে পড়ুন।
+ </p>
+ <small>© 2026 মুক্ত কথা • মনের জানালা, সবার জন্য</small>
 </footer>
 
-
-<!-- JAVASCRIPT -->
-
 <script>
+"use strict";
 
 const chatArea = document.getElementById("chatArea");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
 const statusBox = document.getElementById("status");
+const charCount = document.getElementById("charCount");
+const themeToggle = document.getElementById("themeToggle");
 
 const colors = [
-  "#1677c8",
-  "#e74c3c",
-  "#8e44ad",
-  "#16a085",
-  "#d35400",
-  "#2c3e50",
-  "#c0392b",
-  "#2980b9",
-  "#7d3c98",
-  "#229954",
-  "#e84393",
-  "#6c5ce7"
+ "#1677c8","#e74c3c","#8e44ad","#16a085",
+ "#d35400","#2c3e50","#c0392b","#2980b9",
+ "#7d3c98","#229954","#e84393","#6c5ce7"
 ];
 
-// Browser-wise color
-
-function getMyColor() {
-
-  let color = localStorage.getItem("muktoKothaColor");
-
-  if (!color) {
-
-    color = colors[
-      Math.floor(Math.random() * colors.length)
-    ];
-
-    localStorage.setItem("muktoKothaColor", color);
-
+// প্রত্যেক ব্রাউজারের জন্য আলাদা রং
+function getMyColor(){
+ try{
+  let color=localStorage.getItem("muktoKothaColor");
+  if(!color){
+   color=colors[Math.floor(Math.random()*colors.length)];
+   localStorage.setItem("muktoKothaColor",color);
   }
-
   return color;
-
+ }catch(e){
+  return colors[Math.floor(Math.random()*colors.length)];
+ }
 }
 
-const myColor = getMyColor();
+const myColor=getMyColor();
 
-let previousMessages = "";
-let loadingMessages = false;
-
-
-// LOAD MESSAGES
-
-function loadMessages() {
-
-  if (loadingMessages) return;
-
-  loadingMessages = true;
-
-  google.script.run
-
-    .withSuccessHandler(function(messages) {
-
-      loadingMessages = false;
-
-      const current = JSON.stringify(messages);
-
-      if (current === previousMessages) return;
-
-      previousMessages = current;
-
-      chatArea.innerHTML = "";
-
-      if (!messages || messages.length === 0) {
-
-        const empty = document.createElement("div");
-
-        empty.className = "empty";
-
-        empty.innerHTML =
-          "<h3>🌿 মুক্ত কথায় স্বাগতম</h3><p>আপনিই প্রথম মনের কথা লিখুন।</p>";
-
-        chatArea.appendChild(empty);
-
-        return;
-
-      }
-
-      messages.forEach(function(item) {
-
-        const messageBox = document.createElement("div");
-
-        messageBox.className = "message";
-
-        const messageText = document.createElement("div");
-
-        messageText.className = "message-text";
-
-        messageText.textContent = item.message;
-
-        messageText.style.color =
-          /^#[0-9A-Fa-f]{6}$/.test(item.color)
-          ? item.color
-          : "#1677c8";
-
-        const time = document.createElement("div");
-
-        time.className = "message-time";
-
-        time.textContent = item.time;
-
-        messageBox.appendChild(messageText);
-
-        messageBox.appendChild(time);
-
-        chatArea.appendChild(messageBox);
-
-      });
-
-      chatArea.scrollTop = chatArea.scrollHeight;
-
-    })
-
-    .withFailureHandler(function(error) {
-
-      loadingMessages = false;
-
-      statusBox.textContent =
-        "মেসেজ লোড করা যাচ্ছে না।";
-
-    })
-
-    .getMessages();
-
+// Dark mode
+function applyTheme(theme){
+ document.body.classList.toggle("dark",theme==="dark");
+ themeToggle.textContent=theme==="dark"?"☀️ লাইট":"🌙 ডার্ক";
+ try{localStorage.setItem("muktoKothaTheme",theme);}catch(e){}
 }
 
+let savedTheme="light";
+try{
+ savedTheme=localStorage.getItem("muktoKothaTheme")||"light";
+}catch(e){}
 
-// SEND MESSAGE
+applyTheme(savedTheme);
 
-function sendMessage() {
+themeToggle.addEventListener("click",function(){
+ const next=document.body.classList.contains("dark")?"light":"dark";
+ applyTheme(next);
+});
 
-  const message = messageInput.value.trim();
+let previousMessages="";
+let loadingMessages=false;
 
-  if (!message) {
+function setStatus(text){
+ statusBox.textContent=text;
+}
 
-    statusBox.textContent =
-      "আপনার মনের কথা লিখে পাঠান।";
+// মেসেজ লোড
+function loadMessages(){
 
-    return;
+ if(loadingMessages)return;
 
+ if(!window.google || !google.script || !google.script.run){
+  setStatus("Apps Script Web App URL থেকে সাইটটি খুলুন।");
+  return;
+ }
+
+ loadingMessages=true;
+
+ google.script.run
+ .withSuccessHandler(function(messages){
+
+  loadingMessages=false;
+
+  const list=Array.isArray(messages)?messages:[];
+  const signature=JSON.stringify(list);
+
+  if(signature===previousMessages)return;
+
+  previousMessages=signature;
+
+  const nearBottom=
+   chatArea.scrollHeight-chatArea.scrollTop-chatArea.clientHeight<90;
+
+  chatArea.replaceChildren();
+
+  if(!list.length){
+
+   const empty=document.createElement("div");
+   empty.className="empty";
+
+   const leaf=document.createElement("div");
+   leaf.className="leaf";
+   leaf.textContent="🌿";
+
+   const heading=document.createElement("h3");
+   heading.textContent="মুক্ত কথায় স্বাগতম";
+
+   const paragraph=document.createElement("p");
+   paragraph.textContent="আপনার একটি কথাই হতে পারে সুন্দর আলাপের শুরু।";
+
+   empty.append(leaf,heading,paragraph);
+   chatArea.appendChild(empty);
+   return;
   }
 
-  sendButton.disabled = true;
+  list.forEach(function(item){
 
-  statusBox.textContent = "মেসেজ পাঠানো হচ্ছে...";
+   const bubble=document.createElement("article");
+   bubble.className="message";
 
-  google.script.run
+   const body=document.createElement("div");
+   body.className="message-text";
+   body.textContent=String(item.message||"");
 
-    .withSuccessHandler(function(result) {
+   body.style.color=
+    /^#[0-9a-fA-F]{6}$/.test(item.color||"")
+     ?item.color:"#176b55";
 
-      messageInput.value = "";
+   const time=document.createElement("div");
+   time.className="message-time";
+   time.textContent=String(item.time||"");
 
-      messageInput.style.height = "48px";
+   bubble.append(body,time);
+   chatArea.appendChild(bubble);
+  });
 
-      sendButton.disabled = false;
+  if(nearBottom){
+   chatArea.scrollTop=chatArea.scrollHeight;
+  }
 
-      statusBox.textContent = "";
+ })
+ .withFailureHandler(function(error){
 
-      loadMessages();
+  loadingMessages=false;
+  setStatus("মেসেজ লোড করা যাচ্ছে না। পরে আবার চেষ্টা করুন।");
+  console.error(error);
 
-      messageInput.focus();
-
-    })
-
-    .withFailureHandler(function(error) {
-
-      sendButton.disabled = false;
-
-      statusBox.textContent =
-        error.message || "মেসেজ পাঠানো যায়নি।";
-
-    })
-
-    .sendMessage(message, myColor);
-
+ })
+ .getMessages();
 }
 
+// মেসেজ পাঠানো
+function sendMessage(){
 
-// ENTER TO SEND
+ const message=messageInput.value.trim();
 
-messageInput.addEventListener("keydown", function(event) {
+ if(!message){
+  setStatus("আগে আপনার মনের কথাটি লিখুন।");
+  messageInput.focus();
+  return;
+ }
 
-  if (event.key === "Enter" && !event.shiftKey) {
+ if(message.length>2000){
+  setStatus("সর্বোচ্চ ২০০০ অক্ষর পাঠানো যাবে।");
+  return;
+ }
 
-    event.preventDefault();
+ if(!window.google || !google.script || !google.script.run){
+  setStatus("Apps Script Web App URL থেকে সাইটটি খুলুন।");
+  return;
+ }
 
-    sendMessage();
+ sendButton.disabled=true;
+ setStatus("দ্রুত পাঠানো হচ্ছে…");
 
-  }
+ // সঙ্গে সঙ্গে চ্যাটে দেখানো
+ const tempBubble=document.createElement("article");
+ tempBubble.className="message";
+
+ const tempBody=document.createElement("div");
+ tempBody.className="message-text";
+ tempBody.textContent=message;
+ tempBody.style.color=myColor;
+
+ const tempTime=document.createElement("div");
+ tempTime.className="message-time";
+ tempTime.textContent="পাঠানো হচ্ছে…";
+
+ tempBubble.append(tempBody,tempTime);
+
+ const emptyNode=chatArea.querySelector(".empty");
+ if(emptyNode)chatArea.replaceChildren();
+
+ chatArea.appendChild(tempBubble);
+ chatArea.scrollTop=chatArea.scrollHeight;
+
+ // Google Sheet-এ পাঠানো
+ google.script.run
+
+ .withSuccessHandler(function(result){
+
+  messageInput.value="";
+  messageInput.style.height="49px";
+  charCount.textContent="০ / ২০০০";
+
+  sendButton.disabled=false;
+  setStatus("মেসেজ পাঠানো হয়েছে ✓");
+
+  previousMessages="";
+  loadMessages();
+  messageInput.focus();
+
+ })
+
+ .withFailureHandler(function(error){
+
+  sendButton.disabled=false;
+  tempTime.textContent="পাঠানো যায়নি";
+
+  setStatus(
+   error&&error.message
+    ?error.message
+    :"মেসেজ পাঠানো যায়নি। আবার চেষ্টা করুন।"
+  );
+
+  console.error(error);
+
+ })
+
+ .sendMessage(message,myColor);
+}
+
+// পাঠানোর বাটন
+sendButton.addEventListener("click",sendMessage);
+
+// Enter দিয়ে পাঠানো
+messageInput.addEventListener("keydown",function(event){
+
+ if(event.key==="Enter"&&!event.shiftKey){
+  event.preventDefault();
+  sendMessage();
+ }
 
 });
 
+// অক্ষর গণনা
+messageInput.addEventListener("input",function(){
 
-// AUTO RESIZE
+ this.style.height="49px";
+ this.style.height=Math.min(this.scrollHeight,130)+"px";
 
-messageInput.addEventListener("input", function() {
-
-  this.style.height = "48px";
-
-  this.style.height =
-    Math.min(this.scrollHeight, 120) + "px";
+ charCount.textContent=
+  this.value.length.toLocaleString("bn-BD")+" / ২০০০";
 
 });
 
+// লেখার টেমপ্লেট
+document.querySelectorAll("[data-prompt]").forEach(function(button){
 
-// INITIAL LOAD
+ button.addEventListener("click",function(){
 
+  messageInput.value=this.dataset.prompt;
+
+  messageInput.dispatchEvent(new Event("input"));
+
+  document.getElementById("public-chat")
+   .scrollIntoView({behavior:"smooth"});
+
+  messageInput.focus();
+
+ });
+
+});
+
+// প্রথমবার মেসেজ লোড
 loadMessages();
 
-
-// AUTO REFRESH EVERY 3 SECONDS
-
-setInterval(loadMessages, 3000);
+// প্রতি ৩ সেকেন্ডে নতুন মেসেজ চেক
+setInterval(loadMessages,3000);
 
 </script>
-
 </body>
 </html>
