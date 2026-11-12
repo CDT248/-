@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মুক্ত কথা — মনের কথা বলুন</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #176b55;
+  --dark: #123c32;
+  --light: #eaf5ef;
+  --white: #ffffff;
+  --text: #243b35;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: #f5f8f5;
+  color: var(--text);
+}
+
+/* Navigation */
+
+.navbar {
+  background: white;
+  padding: 15px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0,0,0,.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.nav-tag {
+  color: #688078;
+  font-size: 13px;
+}
+
+/* Hero */
+
+.hero {
+  background: linear-gradient(135deg,#123c32,#176b55,#278c6b);
+  color: white;
+  padding: 75px 20px 85px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: "❝";
+  position: absolute;
+  font-size: 180px;
+  color: rgba(255,255,255,.06);
+}
+
+.hero::before {
+  left: 5%;
+  top: 5px;
+}
+
+.hero::after {
+  right: 5%;
+  bottom: -65px;
+  transform: rotate(180deg);
+}
+
+.hero-content {
+  max-width: 850px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: clamp(34px,6vw,58px);
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero h2 {
+  font-size: clamp(20px,3vw,30px);
+  font-weight: 500;
+  color: #d9f5e8;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 17px;
+  line-height: 2;
+  color: #e5f4ed;
+}
+
+.hero-button {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 13px 30px;
+  background: white;
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 700;
+  transition: .3s;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+}
+
+/* Quotes */
+
+.quotes {
+  max-width: 1150px;
+  margin: 45px auto;
+  padding: 0 20px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  font-size: 29px;
+  color: var(--dark);
+}
+
+.section-heading p {
+  color: #81928a;
+  margin-top: 5px;
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.quote-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.04);
+  border-bottom: 3px solid #80b9a0;
+}
+
+.quote-card .symbol {
+  font-size: 30px;
+  color: #55a181;
+}
+
+.quote-card p {
+  font-size: 17px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.quote-card span {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #8a9b93;
+}
+
+/* Chat section */
+
+.chat-section {
+  max-width: 950px;
+  margin: 55px auto;
+  padding: 0 15px;
+}
+
+.chat-title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.chat-title h2 {
+  font-size: 34px;
+  color: var(--dark);
+}
+
+.chat-title p {
+  color: #7c9086;
+  font-size: 15px;
+}
+
+.chat-container {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 35px rgba(0,0,0,.08);
+  border: 1px solid #e6eee8;
+}
+
+.chat-header {
+  background: #176b55;
+  padding: 18px 22px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  font-size: 21px;
+}
+
+.chat-header p {
+  font-size: 12px;
+  color: #d8eee4;
+}
+
+.public-label {
+  font-size: 12px;
+  background: rgba(255,255,255,.15);
+  padding: 7px 12px;
+  border-radius: 20px;
+}
+
+.chat-notice {
+  text-align: center;
+  background: #f0f8f3;
+  padding: 11px;
+  font-size: 13px;
+  color: #567a67;
+}
+
+.chat-area {
+  height: 430px;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  background: #f8fbf8;
+}
+
+.message {
+  max-width: 80%;
+  background: white;
+  padding: 11px 15px;
+  border-radius: 13px;
+  border: 1px solid #e6eee8;
+  align-self: flex-start;
+  box-shadow: 0 2px 5px rgba(0,0,0,.025);
+  overflow-wrap: anywhere;
+}
+
+.message-text {
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.message-time {
+  font-size: 10px;
+  text-align: right;
+  color: #a0aaa4;
+  margin-top: 5px;
+}
+
+.empty {
+  margin: auto;
+  text-align: center;
+  color: #91a198;
+  line-height: 2;
+}
+
+.chat-footer {
+  padding: 16px;
+  border-top: 1px solid #edf1ed;
+}
+
+.input-box {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+#messageInput {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  max-height: 120px;
+  resize: none;
+  outline: none;
+  border: 1px solid #dce8df;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+#messageInput:focus {
+  border-color: #29916b;
+}
+
+#sendButton {
+  background: #176b55;
+  border: none;
+  color: white;
+  padding: 12px 23px;
+  height: 48px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#sendButton:hover {
+  background: #104b3b;
+}
+
+#sendButton:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.status {
+  text-align: center;
+  font-size: 12px;
+  color: #c34e4e;
+  min-height: 19px;
+  margin-top: 5px;
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 11px;
+  color: #91a198;
+  margin-top: 8px;
+}
+
+/* Bottom */
+
+.bottom {
+  background: #123c32;
+  color: white;
+  text-align: center;
+  padding: 35px 15px;
+}
+
+.bottom h2 {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.bottom p {
+  color: #c5ddd1;
+  font-size: 13px;
+}
+
+.bottom small {
+  display: block;
+  margin-top: 18px;
+  color: #91b4a3;
+}
+
+@media(max-width:700px) {
+  .quote-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 55px 20px 65px;
+  }
+
+  .navbar {
+    padding: 12px 5%;
+  }
+
+  .nav-tag {
+    font-size: 10px;
+  }
+
+  .chat-area {
+    height: 400px;
+  }
+
+  .chat-title h2 {
+    font-size: 27px;
+  }
+
+  .message {
+    max-width: 92%;
+  }
+}
+
+@media(max-width:400px) {
+  #sendButton {
+    padding: 12px 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+  <div class="logo">মুক্ত কথা.</div>
+  <div class="nav-tag">একটি মুক্ত মনের জায়গা</div>
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>মুক্ত কথা</h1>
+
+    <h2>মন খুলে বলুন, নির্ভয়ে লিখুন</h2>
+
+    <p>
+      কিছু কথা থাকে যা কাউকে বলা যায় না।<br>
+      কিছু অনুভূতি থাকে যা মনের ভেতর জমে থাকে।<br>
+      কিছু কষ্ট থাকে যা প্রকাশ করার জায়গা খুঁজে পায় না।
+    </p>
+
+    <p>
+      এখানে আপনার মনের কথা লিখুন।<br>
+      আপনার পরিচয় প্রকাশ না করেই নিজের অনুভূতি ভাগ করে নিন।
+    </p>
+
+    <a href="#public-chat" class="hero-button">
+      মনের কথা লিখুন ↓
+    </a>
+
+  </div>
+
+</section>
+
+<!-- QUOTES -->
+
+<section class="quotes">
+
+  <div class="section-heading">
+    <h2>আপনার মনের কথাগুলো মূল্যবান</h2>
+    <p>কিছু অনুভূতি, কিছু উপলব্ধি, কিছু জীবনের কথা</p>
+  </div>
+
+  <div class="quote-grid">
+
+    <div class="quote-card">
+      <div class="symbol">❝</div>
+      <p>
+        সবসময় হাসি মানেই ভালো থাকা নয়,
+        কখনো কখনো হাসির আড়ালেও অনেক গল্প লুকিয়ে থাকে।
+      </p>
+      <span>— জীবনের অনুভূতি</span>
+    </div>
+
+    <div class="quote-card">
+      <div class="symbol">❝</div>
+      <p>
+        মনের কথা চেপে রাখবেন না।
+        আপনার অনুভূতিরও প্রকাশ পাওয়ার অধিকার আছে।
+      </p>
+      <span>— নিজের জন্য কিছু কথা</span>
+    </div>
+
+    <div class="quote-card">
+      <div class="symbol">❝</div>
+      <p>
+        পৃথিবীতে প্রত্যেক মানুষেরই এমন একটা জায়গা দরকার,
+        যেখানে সে নির্দ্বিধায় নিজের কথা বলতে পারে।
+      </p>
+      <span>— মুক্ত কথার ভাবনা</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CHAT -->
+
+<section class="chat-section" id="public-chat">
+
+  <div class="chat-title">
+    <h2>সবার মুক্ত আড্ডা</h2>
+    <p>লিখুন আপনার মনের কথা, পড়ুন অন্যদের অনুভূতি</p>
+  </div>
+
+  <div class="chat-container">
+
+    <div class="chat-header">
+
+      <div>
+        <h3>💬 মুক্ত কথার গ্রুপ</h3>
+        <p>একটি সবার জন্য উন্মুক্ত কথোপকথন</p>
+      </div>
+
+      <div class="public-label">
+        ● Public Chat
+      </div>
+
+    </div>
+
+    <div class="chat-notice">
+      এখানে নাম দেখানো হয় না। সবাই নিজের মতো করে কথা বলতে পারেন।
+    </div>
+
+    <main class="chat-area" id="chatArea">
+
+      <div class="empty">
+        <h3>🌿 মুক্ত কথায় স্বাগতম</h3>
+        <p>আপনিই শুরু করুন আপনার মনের কথা।</p>
+      </div>
+
+    </main>
+
+    <div class="chat-footer">
+
+      <div class="input-box">
+
+        <textarea
+          id="messageInput"
+          placeholder="এখানে আপনার মনের কথা লিখুন..."
+          maxlength="2000"
+          rows="1"
+        ></textarea>
+
+        <button id="sendButton" onclick="sendMessage()">
+          পাঠান ➤
+        </button>
+
+      </div>
+
+      <div class="status" id="status"></div>
+
+      <div class="footer-note">
+        আপনার নাম বা Username এখানে দেখানো হবে না।
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bottom">
+
+  <h2>মুক্ত কথা.</h2>
+
+  <p>
+    এখানে কথা বলার কোনো বাধা নেই,
+    আপনার অনুভূতিই আপনার পরিচয়।
+  </p>
+
+  <small>
+    © 2026 মুক্ত কথা | একটি উন্মুক্ত কথোপকথনের জায়গা
+  </small>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+const chatArea = document.getElementById("chatArea");
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+const statusBox = document.getElementById("status");
+
+const colors = [
+  "#1677c8",
+  "#e74c3c",
+  "#8e44ad",
+  "#16a085",
+  "#d35400",
+  "#2c3e50",
+  "#c0392b",
+  "#2980b9",
+  "#7d3c98",
+  "#229954",
+  "#e84393",
+  "#6c5ce7"
+];
+
+// Browser-wise color
+
+function getMyColor() {
+
+  let color = localStorage.getItem("muktoKothaColor");
+
+  if (!color) {
+
+    color = colors[
+      Math.floor(Math.random() * colors.length)
+    ];
+
+    localStorage.setItem("muktoKothaColor", color);
+
+  }
+
+  return color;
+
+}
+
+const myColor = getMyColor();
+
+let previousMessages = "";
+let loadingMessages = false;
+
+
+// LOAD MESSAGES
+
+function loadMessages() {
+
+  if (loadingMessages) return;
+
+  loadingMessages = true;
+
+  google.script.run
+
+    .withSuccessHandler(function(messages) {
+
+      loadingMessages = false;
+
+      const current = JSON.stringify(messages);
+
+      if (current === previousMessages) return;
+
+      previousMessages = current;
+
+      chatArea.innerHTML = "";
+
+      if (!messages || messages.length === 0) {
+
+        const empty = document.createElement("div");
+
+        empty.className = "empty";
+
+        empty.innerHTML =
+          "<h3>🌿 মুক্ত কথায় স্বাগতম</h3><p>আপনিই প্রথম মনের কথা লিখুন।</p>";
+
+        chatArea.appendChild(empty);
+
+        return;
+
+      }
+
+      messages.forEach(function(item) {
+
+        const messageBox = document.createElement("div");
+
+        messageBox.className = "message";
+
+        const messageText = document.createElement("div");
+
+        messageText.className = "message-text";
+
+        messageText.textContent = item.message;
+
+        messageText.style.color =
+          /^#[0-9A-Fa-f]{6}$/.test(item.color)
+          ? item.color
+          : "#1677c8";
+
+        const time = document.createElement("div");
+
+        time.className = "message-time";
+
+        time.textContent = item.time;
+
+        messageBox.appendChild(messageText);
+
+        messageBox.appendChild(time);
+
+        chatArea.appendChild(messageBox);
+
+      });
+
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+    })
+
+    .withFailureHandler(function(error) {
+
+      loadingMessages = false;
+
+      statusBox.textContent =
+        "মেসেজ লোড করা যাচ্ছে না।";
+
+    })
+
+    .getMessages();
+
+}
+
+
+// SEND MESSAGE
+
+function sendMessage() {
+
+  const message = messageInput.value.trim();
+
+  if (!message) {
+
+    statusBox.textContent =
+      "আপনার মনের কথা লিখে পাঠান।";
+
+    return;
+
+  }
+
+  sendButton.disabled = true;
+
+  statusBox.textContent = "মেসেজ পাঠানো হচ্ছে...";
+
+  google.script.run
+
+    .withSuccessHandler(function(result) {
+
+      messageInput.value = "";
+
+      messageInput.style.height = "48px";
+
+      sendButton.disabled = false;
+
+      statusBox.textContent = "";
+
+      loadMessages();
+
+      messageInput.focus();
+
+    })
+
+    .withFailureHandler(function(error) {
+
+      sendButton.disabled = false;
+
+      statusBox.textContent =
+        error.message || "মেসেজ পাঠানো যায়নি।";
+
+    })
+
+    .sendMessage(message, myColor);
+
+}
+
+
+// ENTER TO SEND
+
+messageInput.addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter" && !event.shiftKey) {
+
+    event.preventDefault();
+
+    sendMessage();
+
+  }
+
+});
+
+
+// AUTO RESIZE
+
+messageInput.addEventListener("input", function() {
+
+  this.style.height = "48px";
+
+  this.style.height =
+    Math.min(this.scrollHeight, 120) + "px";
+
+});
+
+
+// INITIAL LOAD
+
+loadMessages();
+
+
+// AUTO REFRESH EVERY 3 SECONDS
+
+setInterval(loadMessages, 3000);
+
+</script>
+
+</body>
+</html>
